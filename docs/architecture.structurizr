@@ -1,0 +1,43 @@
+workspace "Symfony Gallery" "Test application for user-generated galleries, build with Symfony" {
+	!identifiers hierarchical
+
+	model {
+		user = person "Visitor"
+
+		software = softwareSystem "System" {
+			webApp = container "Symfony"
+			database = container "PostgreSQL" {
+				tags "Database"
+			}
+			queue = container "RabbitMQ" {
+				tags "Queue"
+			}
+			search = container "Elasticsearch" {
+				tags "Search"
+			}
+			storage = container "SeaweedFS" {
+				tags "S3"
+			}
+		}
+
+		user -> software "uses"
+		user -> software.webApp "uses"
+		software.webApp -> software.database "Read/write"
+		software.webApp -> software.queue "Dispatch"
+		software.webApp -> software.storage "Store"
+		software.webApp -> software.search "Search"
+		software.queue -> software.webApp "Process"
+		software.queue -> software.search "Update index"
+		software.queue -> software.storage "Service and cleanup"
+	}
+
+	views {
+		systemContext software "SystemContext" {
+			include *
+		}
+
+		container software "ContainerContext" {
+			include *
+		}
+	}
+}

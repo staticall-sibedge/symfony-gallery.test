@@ -1,0 +1,31 @@
+{
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+        ]
+    },
+    "timeout": 10,
+    "threads": "max",
+    "logs": {
+        "text": "infection.log",
+        "html": "infection.html",
+        "summary": "summary.log",
+        "json": "infection-log.json",
+        "perMutator": "per-mutator.md"
+    },
+    "phpUnit": {
+        "configDir": "."
+    },
+    "phpStan": {
+        "configDir": "."
+    },
+    "mutators": {
+    },
+    "timeoutsAsEscaped": true,
+    "maxTimeouts": 10,
+    "dotsPerRow": 80,
+    "testFramework": "phpunit",
+    "staticAnalysisTool": "phpstan"
+}
