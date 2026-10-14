@@ -4,8 +4,8 @@ namespace App\Module\Gallery\Action\Store;
 
 use App\Entity\Gallery;
 use App\Module\Gallery\Dto\Action\Store\PinGalleryDtoInterface;
+use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Safe\DateTimeImmutable;
 
 final class PinGalleryAction implements PinGalleryActionInterface
 {
@@ -16,7 +16,7 @@ final class PinGalleryAction implements PinGalleryActionInterface
     public function execute(Gallery $gallery, PinGalleryDtoInterface $actionDto): Gallery
     {
         $gallery->setIsPinned($actionDto->isPinned);
-        $gallery->setPinnedAt(new DateTimeImmutable());
+        $gallery->setPinnedAt($actionDto->isPinned === true ? CarbonImmutable::now() : null);
 
         $this->entityManager->flush();
 

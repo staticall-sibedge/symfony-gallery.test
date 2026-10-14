@@ -2,14 +2,9 @@
 
 namespace App\Module\Gallery\Dto\Action\Store;
 
-interface UploadImageToGalleryDtoInterface
+interface AppendFileToGalleryDtoInterface
 {
-    public const string KEY_FILE_ID = 'fileId';
     public const string KEY_SORT_ORDER = 'sortOrder';
-
-    public string $fileId {
-        get;
-    }
 
     public ?int $sortOrder {
         get;

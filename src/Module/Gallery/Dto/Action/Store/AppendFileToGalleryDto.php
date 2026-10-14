@@ -6,13 +6,9 @@ use App\Module\Dto\Action\ActionDtoInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class UploadImageToGalleryDto implements UploadImageToGalleryDtoInterface, ActionDtoInterface
+final class AppendFileToGalleryDto implements AppendFileToGalleryDtoInterface, ActionDtoInterface
 {
     public function __construct(
-        #[Assert\NotBlank()]
-        #[Assert\Uuid()]
-        public readonly string $fileId,
-
         #[Assert\Length(min: 1, max: 512)]
         public readonly ?int $sortOrder,
     )
@@ -22,7 +18,6 @@ final class UploadImageToGalleryDto implements UploadImageToGalleryDtoInterface,
     public function toArray(): array
     {
         return [
-            self::KEY_FILE_ID => $this->fileId,
             self::KEY_SORT_ORDER => $this->sortOrder,
         ];
     }
@@ -30,7 +25,6 @@ final class UploadImageToGalleryDto implements UploadImageToGalleryDtoInterface,
     public static function fromRequest(Request $request): static
     {
         return new static(
-            (string) $request->request->get(self::KEY_FILE_ID),
             $request->request->has(self::KEY_SORT_ORDER) ? (string) $request->request->get(self::KEY_SORT_ORDER) : null,
         );
     }

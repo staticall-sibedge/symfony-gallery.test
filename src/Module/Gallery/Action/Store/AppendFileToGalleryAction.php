@@ -5,16 +5,16 @@ namespace App\Module\Gallery\Action\Store;
 use App\Entity\File;
 use App\Entity\Gallery;
 use App\Entity\GalleryImage;
-use App\Module\Gallery\Dto\Action\Store\UploadImageToGalleryDtoInterface;
+use App\Module\Gallery\Dto\Action\Store\AppendFileToGalleryDtoInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class UploadImageToGalleryAction implements UploadImageToGalleryActionInterface
+final class AppendFileToGalleryAction implements AppendFileToGalleryActionInterface
 {
     public function __construct(private readonly EntityManagerInterface $entityManager)
     {
     }
 
-    public function execute(Gallery $gallery, File $file, UploadImageToGalleryDtoInterface $actionDto): GalleryImage
+    public function execute(Gallery $gallery, File $file, AppendFileToGalleryDtoInterface $actionDto): GalleryImage
     {
         if ($gallery->hasByFile($file) === true) {
             return $gallery->getByFile($file);
@@ -29,7 +29,7 @@ final class UploadImageToGalleryAction implements UploadImageToGalleryActionInte
         $gallery->getImages()->add($galleryImage);
 
         $this->entityManager->persist($galleryImage);
-        $this->entityManager->save();
+        $this->entityManager->flush();
 
         return $galleryImage;
     }

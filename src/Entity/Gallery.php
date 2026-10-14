@@ -168,7 +168,7 @@ class Gallery
         return $this->pinnedAt;
     }
 
-    public function setPinnedAt(CarbonImmutable $pinnedAt): static
+    public function setPinnedAt(?CarbonImmutable $pinnedAt): static
     {
         $this->pinnedAt = $pinnedAt;
 
