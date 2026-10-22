@@ -9,11 +9,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class UploadFileDto implements UploadFileDtoInterface, ActionDtoInterface
 {
-    public const STRING KEY_FILE = 'file';
+    public const string REQUEST_KEY_FILE = 'file';
+    public const int|float VALIDATION_MAX_WIDTH = 3000;
+    public const int|float VALIDATION_MAX_HEIGHT = 3000;
 
     public function __construct(
         #[Assert\NotBlank()]
-        #[Assert\File()]
+        #[Assert\Image(maxWidth: self::VALIDATION_MAX_WIDTH, maxHeight: self::VALIDATION_MAX_HEIGHT)]
         public readonly UploadedFile $uploadedFile,
     )
     {
@@ -26,7 +28,7 @@ final class UploadFileDto implements UploadFileDtoInterface, ActionDtoInterface
         ];
     }
 
-    public static function fromRequest(Request $request, string $fileKey = self::KEY_FILE): static
+    public static function fromRequest(Request $request, string $fileKey = self::REQUEST_KEY_FILE): static
     {
         return new static(
             $request->files->get($fileKey),

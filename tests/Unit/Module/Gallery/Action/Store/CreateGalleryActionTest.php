@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CreateGalleryActionTest extends TestCase
 {
-    public function testShouldUpdateGalleryWithNewData(): void
+    public function testShouldCreateGallery(): void
     {
         $dto = new CreateGalleryDto('Testing creating gallery', null, GalleryStatusEnum::PUBLISHED->value);
 

@@ -7,7 +7,7 @@ use App\Module\Gallery\Dto\Action\Query\SingleGalleryDto\RequiredDataIsMissingEx
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-final class SingleGalleryFilterDtoTest extends TestCase
+final class SingleGalleryDtoTest extends TestCase
 {
     public function testEmptyRequest(): void
     {

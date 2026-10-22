@@ -149,19 +149,19 @@ class File
         return $this->processedAt;
     }
 
-    public function setProcessedAt(CarbonImmutable $processedAt): static
+    public function setProcessedAt(?CarbonImmutable $processedAt): static
     {
         $this->processedAt = $processedAt;
 
         return $this;
     }
 
-    public function getDeletedAt(): CarbonImmutable
+    public function getDeletedAt(): ?CarbonImmutable
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(CarbonImmutable $deletedAt): static
+    public function setDeletedAt(?CarbonImmutable $deletedAt): static
     {
         $this->deletedAt = $deletedAt;
 
